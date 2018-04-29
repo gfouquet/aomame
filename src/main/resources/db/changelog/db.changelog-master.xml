@@ -8,7 +8,7 @@
   <changeSet id="lx-lx" author="gfouquet">
     <comment>Table : list_xml</comment>
 
-    <createSequence sequenceName="seq_list_xml" />
+    <createSequence sequenceName="seq_list_xml"/>
 
     <createTable tableName="list_xml">
       <column name="id" type="int" defaultValueSequenceNext="seq_list_xml">
@@ -37,7 +37,7 @@
   <changeSet id="lx-game" author="gfouquet">
     <comment>Table : game</comment>
 
-    <createSequence sequenceName="seq_game" incrementBy="1000" />
+    <createSequence sequenceName="seq_game" incrementBy="1000"/>
 
     <createTable tableName="game">
       <column name="id" defaultValueSequenceNext="seq_game" type="int">
@@ -72,7 +72,7 @@
   <changeSet id="lx-biosset" author="gfouquet">
     <comment>Table : biosset</comment>
 
-    <createSequence sequenceName="seq_biosset" incrementBy="1000" />
+    <createSequence sequenceName="seq_biosset" incrementBy="1000"/>
 
     <createTable tableName="biosset">
       <column name="id" defaultValueSequenceNext="seq_biosset" type="int">
@@ -98,7 +98,7 @@
   <changeSet id="lx-rom" author="gfouquet">
     <comment>Table : rom</comment>
 
-    <createSequence sequenceName="seq_rom" incrementBy="1000" />
+    <createSequence sequenceName="seq_rom" incrementBy="1000"/>
 
     <createTable tableName="rom">
       <column name="id" defaultValueSequenceNext="seq_rom" type="int">
@@ -125,10 +125,10 @@
   <changeSet id="lx-driver" author="gfouquet">
     <comment>Table : driver</comment>
 
-    <createSequence sequenceName="seq_driver" incrementBy="1000" />
+    <createSequence sequenceName="seq_driver" incrementBy="1000"/>
 
     <createTable tableName="driver">
-      <column name="id" type="int" >
+      <column name="id" type="int">
         <constraints foreignKeyName="fk_driver_game_id" nullable="false" referencedTableName="game"
                      referencedColumnNames="id" primaryKey="true"/>
       </column>
@@ -146,7 +146,7 @@
   <changeSet id="lx-disk" author="gfouquet">
     <comment>Table : disk</comment>
 
-    <createSequence sequenceName="seq_disk" incrementBy="1000" />
+    <createSequence sequenceName="seq_disk" incrementBy="1000"/>
 
     <createTable tableName="disk">
       <column name="id" defaultValueSequenceNext="seq_disk" type="int">
