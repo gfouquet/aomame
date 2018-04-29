@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="lx-lx" author="gfouquet">
+    <comment>Table : list_xml</comment>
+
+    <createSequence sequenceName="seq_list_xml" />
+
+    <createTable tableName="list_xml">
+      <column name="id" type="int" defaultValueSequenceNext="seq_list_xml">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(20)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-mame" author="gfouquet">
+    <comment>Table : mame</comment>
+
+    <createTable tableName="mame">
+      <column name="id" type="int">
+        <constraints foreignKeyName="fk_mame_lst_id" nullable="false" referencedTableName="list_xml"
+                     referencedColumnNames="id" primaryKey="true"/>
+      </column>
+      <column name="build" type="varchar(20)"/>
+      <column name="debug" type="boolean"/>
+      <column name="mameconfig" type="varchar(50)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-game" author="gfouquet">
+    <comment>Table : game</comment>
+
+    <createSequence sequenceName="seq_game" incrementBy="1000" />
+
+    <createTable tableName="game">
+      <column name="id" defaultValueSequenceNext="seq_game" type="int">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)"/>
+      <column name="sourcefile" type="varchar(255)"/>
+      <column name="isbios" type="boolean"/>
+      <column name="isdevice" type="boolean"/>
+      <column name="ismechanical" type="boolean"/>
+      <column name="runnable" type="boolean"/>
+      <column name="cloneof" type="varchar(50)"/>
+      <column name="romof" type="varchar(50)"/>
+      <column name="sampleof" type="varchar(50)"/>
+      <column name="description" type="varchar(255)"/>
+      <column name="year" type="int"/>
+      <column name="manufacturer" type="varchar(255)"/>
+    </createTable>
+
+    <createTable tableName="mame_game">
+      <column name="mame_id" type="int">
+        <constraints foreignKeyName="fk_mg_mame_id" nullable="false" referencedTableName="mame"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="game_id" type="int">
+        <constraints foreignKeyName="fk_mg_game_id" nullable="false" referencedTableName="game"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-biosset" author="gfouquet">
+    <comment>Table : biosset</comment>
+
+    <createSequence sequenceName="seq_biosset" incrementBy="1000" />
+
+    <createTable tableName="biosset">
+      <column name="id" defaultValueSequenceNext="seq_biosset" type="int">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)"/>
+      <column name="description" type="varchar(255)"/>
+      <column name="default" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="game_biosset">
+      <column name="game_id" type="int">
+        <constraints foreignKeyName="fk_gb_game_id" nullable="false" referencedTableName="game"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="biosset_id" type="int">
+        <constraints foreignKeyName="fk_gb_biosset_id" nullable="false" referencedTableName="biosset"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-rom" author="gfouquet">
+    <comment>Table : rom</comment>
+
+    <createSequence sequenceName="seq_rom" incrementBy="1000" />
+
+    <createTable tableName="rom">
+      <column name="id" defaultValueSequenceNext="seq_rom" type="int">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(100)"/>
+      <column name="bios" type="varchar(20)"/>
+      <column name="status" type="varchar(20)"/>
+      <column name="optional" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="game_rom">
+      <column name="game_id" type="int">
+        <constraints foreignKeyName="fk_gr_game_id" nullable="false" referencedTableName="game"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="rom_id" type="int">
+        <constraints foreignKeyName="fk_gr_rom_id" nullable="false" referencedTableName="rom"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-driver" author="gfouquet">
+    <comment>Table : driver</comment>
+
+    <createSequence sequenceName="seq_driver" incrementBy="1000" />
+
+    <createTable tableName="driver">
+      <column name="id" type="int" >
+        <constraints foreignKeyName="fk_driver_game_id" nullable="false" referencedTableName="game"
+                     referencedColumnNames="id" primaryKey="true"/>
+      </column>
+      <column name="status" type="varchar(20)"/>
+      <column name="emulation" type="varchar(20)"/>
+      <column name="color" type="varchar(20)"/>
+      <column name="sound" type="varchar(20)"/>
+      <column name="graphic" type="varchar(20)"/>
+      <column name="cocktail" type="varchar(20)"/>
+      <column name="protection" type="varchar(20)"/>
+      <column name="savestate" type="varchar(20)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="lx-disk" author="gfouquet">
+    <comment>Table : disk</comment>
+
+    <createSequence sequenceName="seq_disk" incrementBy="1000" />
+
+    <createTable tableName="disk">
+      <column name="id" defaultValueSequenceNext="seq_disk" type="int">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(100)"/>
+      <column name="merge" type="varchar(100)"/>
+      <column name="status" type="varchar(20)"/>
+      <column name="writable" type="boolean"/>
+      <column name="optional" type="boolean"/>
+    </createTable>
+
+    <createTable tableName="game_disk">
+      <column name="game_id" type="int">
+        <constraints foreignKeyName="fk_gd_game_id" nullable="false" referencedTableName="game"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="disk_id" type="int">
+        <constraints foreignKeyName="fk_gd_disk_id" nullable="false" referencedTableName="disk"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="cv-cv" author="gfouquet">
+    <comment>Table : cat_ver</comment>
+
+    <createTable tableName="cat_ver">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(20)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="cv-cat" author="gfouquet">
+    <comment>Table : cat</comment>
+
+    <createTable tableName="cat">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)">
+        <constraints unique="true" nullable="false"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="cat_ver_cat">
+      <column name="cat_ver_id" type="int">
+        <constraints foreignKeyName="fk_cvc_cat_ver_id" nullable="false" referencedTableName="cat_ver"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="cat_id" type="int">
+        <constraints foreignKeyName="fk_cvc_cat_id" nullable="false" referencedTableName="cat"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="cv-genre" author="gfouquet">
+    <comment>Table : genre</comment>
+
+    <createTable tableName="genre">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="cat_genre">
+      <column name="category_id" type="int">
+        <constraints foreignKeyName="fk_cg_cat_ver_id" nullable="false" referencedTableName="cat"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="genre_id" type="int">
+        <constraints foreignKeyName="fk_cg_genre_id" nullable="false" referencedTableName="genre"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="cv-crb" author="gfouquet">
+    <comment>Table : cat_rom_binding</comment>
+
+    <createTable tableName="cat_rom_binding">
+      <column name="id" type="int" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="rom" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="mature" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+      <column name="genre_id" type="int">
+        <constraints foreignKeyName="fk_crb_genre_id" nullable="false" referencedTableName="genre"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="cat_ver_cat_rom_binding">
+      <column name="cat_ver_id" type="int">
+        <constraints foreignKeyName="fk_cvcrb_cat_ver_id" nullable="false" referencedTableName="cat_ver"
+                     referencedColumnNames="id"/>
+      </column>
+      <column name="binding_id" type="int">
+        <constraints foreignKeyName="fk_cvcrb_binding_id" nullable="false" referencedTableName="cat_rom_binding"
+                     referencedColumnNames="id"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>
