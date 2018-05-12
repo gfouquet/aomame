@@ -1,10 +1,8 @@
 package fr.armida.aomame.domain.listxml
 
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.core.io.ClassPathResource
 import org.springframework.oxm.jaxb.Jaxb2Marshaller
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.io.File
 import java.io.FileInputStream
 import javax.xml.transform.stream.StreamSource
@@ -15,7 +13,6 @@ import javax.xml.transform.stream.StreamSource
  * Usage : subclasses should configure the bound type and the test expectation through a DSL in an init block
  * @sample AdjusterTest
  */
-@ExtendWith(SpringExtension::class)
 internal abstract class JaxbBindingTest<T> {
     private lateinit var interaction: () -> T
     private lateinit var assertion: Res<T>.() -> Unit

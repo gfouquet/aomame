@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "")
 @XmlRootElement(name = "adjuster")
 data class Adjuster(
+
     @XmlAttribute(name = "name", required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
     val name: String,
@@ -18,5 +19,4 @@ data class Adjuster(
     val default: String
 ) {
     constructor() : this("", "")
-
 }

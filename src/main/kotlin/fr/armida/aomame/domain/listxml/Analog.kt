@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "analog")
-data class Analog(
+data class Analog (
 
     @XmlAttribute(name = "mask", required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
