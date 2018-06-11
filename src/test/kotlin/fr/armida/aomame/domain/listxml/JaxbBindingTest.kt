@@ -16,18 +16,33 @@ import javax.xml.transform.stream.StreamSource
 internal abstract class JaxbBindingTest<T> {
     private lateinit var interaction: () -> T
     private lateinit var assertion: Res<T>.() -> Unit
+    private lateinit var xmlSource: () -> File
 
     object `when` {
         // NOOP
     }
 
-    infix fun `when`.unmarshalling(type: Class<T>) {
+    infix fun `when`.unmarshalling(type: Class<T>): `when` {
+        xmlSource = { lookupXmlOf(type) }
+
         interaction = {
             val unmarshaller = createUnmarshallerFor(type)
-            val file = lookupXmlOf(type)
+            val file = xmlSource()
 
             unmarshaller.unmarshal(StreamSource(FileInputStream(file))) as T
         }
+
+
+        return `when`
+    }
+
+    /**
+     * Usage: `when` unmarshalling Foo.class from "foo.alternate"
+     *
+     * @param fileName name of the file to read from the classpath (minus '.xml')
+     */
+    infix fun `when`.from(fileName: String) {
+        xmlSource = { ClassPathResource("$fileName.xml").file }
     }
 
     private fun lookupXmlOf(type: Class<T>): File {
