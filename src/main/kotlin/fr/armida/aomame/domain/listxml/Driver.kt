@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlRootElement(name = "driver")
 @Entity
 // TODO migrate to kotlin
-class Driver(
+data class Driver(
     @Id
     @XmlTransient
     // TODO hibernate id, how should we do ?

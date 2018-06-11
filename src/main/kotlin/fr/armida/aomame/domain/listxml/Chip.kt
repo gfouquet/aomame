@@ -29,7 +29,7 @@ class Chip (
 
     @XmlAttribute(name = "clock")
     @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    var clock: String
+    val clock: String
 
 ) {
     constructor() : this("", "", "", "")
