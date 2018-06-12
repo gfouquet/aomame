@@ -11,16 +11,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = arrayOf("value"))
 @XmlRootElement(name = "ramoption")
-data class Ramoption (
+data class Ramoption(
 
-    @XmlAttribute(name = "default")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "default")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val default: String,
 
-    @XmlValue
+    @field: [
+    XmlValue
+    ]
     val value: String
 
-){
+) {
     constructor() : this("", "")
 }
 

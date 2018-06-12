@@ -15,56 +15,78 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @Entity
 // TODO migrate to kotlin
 data class Rom(
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_rom")
-    @SequenceGenerator(name = "seq_rom", sequenceName = "seq_rom", allocationSize = 1000)
-    @XmlTransient
+    @field: [
+    Id
+    GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_rom")
+    SequenceGenerator(name = "seq_rom", sequenceName = "seq_rom", allocationSize = 1000)
+    XmlTransient
+    ]
     // TODO hibernate id
     val id: Long? = null,
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String,
 
-    @XmlAttribute(name = "bios")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "bios")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val bios: String,
 
-    @XmlAttribute(name = "size", required = true)
-    @Transient
+    @field: [
+    XmlAttribute(name = "size", required = true)
+    Transient
+    ]
     var size: Long,
 
-    @XmlAttribute(name = "crc")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "crc")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val crc: String,
 
-    @XmlAttribute(name = "sha1")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "sha1")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val sha1: String,
 
-    @XmlAttribute(name = "merge")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "merge")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val merge: String,
 
-    @XmlAttribute(name = "region")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "region")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val region: String,
 
-    @XmlAttribute(name = "offset")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "offset")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val offset: String,
 
-    @XmlAttribute(name = "status")
-    @XmlJavaTypeAdapter(StatusAdapter::class)
+    @field: [
+    XmlAttribute(name = "status")
+    XmlJavaTypeAdapter(StatusAdapter::class)
+    ]
     val status: Status,
 
-    @XmlAttribute(name = "optional")
-    @XmlJavaTypeAdapter(YesNoAdapter::class)
+    @field: [
+    XmlAttribute(name = "optional")
+    XmlJavaTypeAdapter(YesNoAdapter::class, type=Boolean::class)
+    ]
     val optional: Boolean
 ) {
     constructor() : this(null, "", "", 0, "", "", "", "", "", GOOD, false)

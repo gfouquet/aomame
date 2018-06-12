@@ -12,23 +12,31 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "chip")
-class Chip (
+class Chip(
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String,
 
-    @XmlAttribute(name = "tag")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "tag")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val tag: String,
 
-    @XmlAttribute(name = "type", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "type", required = true)
+    XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    ]
     val type: String,
 
 
-    @XmlAttribute(name = "clock")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "clock")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val clock: String
 
 ) {

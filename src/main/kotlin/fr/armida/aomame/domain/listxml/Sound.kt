@@ -13,8 +13,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlRootElement(name = "sound")
 data class Sound(
 
-    @XmlAttribute(name = "channels", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "channels", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val channels: String
 ) {
     constructor() : this("")

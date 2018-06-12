@@ -14,8 +14,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 //@Entity
 data class Sample(
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String
 
 ) {

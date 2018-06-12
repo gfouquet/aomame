@@ -15,16 +15,22 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 //@Entity
 data class Softwarelist(
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String,
 
-    @XmlAttribute(name = "status", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "status", required = true)
+    XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    ]
     val status: String,
 
-    @XmlAttribute(name = "filter")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "filter")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val filter: String
 
 ) {

@@ -16,47 +16,63 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @Entity
 class Disk(
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_disk")
-    @SequenceGenerator(name = "seq_disk", sequenceName = "seq_disk", allocationSize = 1)
-    @XmlTransient
+    @field: [
+    Id
+    GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_disk")
+    SequenceGenerator(name = "seq_disk", sequenceName = "seq_disk", allocationSize = 1)
+    XmlTransient
+    ]
     var id: Long? = null,
 
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String,
 
 
-    @XmlAttribute(name = "sha1")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "sha1")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val sha1: String,
 
 
-    @XmlAttribute(name = "merge")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "merge")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val merge: String,
 
 
-    @XmlAttribute(name = "region")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "region")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val region: String,
 
 
-    @XmlAttribute(name = "index")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
-    @Transient
+    @field: [
+    XmlAttribute(name = "index")
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    Transient
+    ]
     val index: String,
 
 
-    @XmlAttribute(name = "writable")
-    @XmlJavaTypeAdapter(YesNoAdapter::class)
+    @field: [
+    XmlAttribute(name = "writable")
+    XmlJavaTypeAdapter(YesNoAdapter::class)
+    ]
     val writable: Boolean,
 
-    @XmlAttribute(name = "status")
-    @XmlJavaTypeAdapter(StatusAdapter::class)
+    @field: [
+    XmlAttribute(name = "status")
+    XmlJavaTypeAdapter(StatusAdapter::class)
+    ]
     val status: Status
 
 ) {

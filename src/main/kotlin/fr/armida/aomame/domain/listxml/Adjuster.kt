@@ -10,12 +10,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlRootElement(name = "adjuster")
 data class Adjuster(
 
-    @XmlAttribute(name = "name", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "name", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val name: String,
 
-    @XmlAttribute(name = "default", required = true)
-    @XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    @field: [
+    XmlAttribute(name = "default", required = true)
+    XmlJavaTypeAdapter(NormalizedStringAdapter::class)
+    ]
     val default: String
 ) {
     constructor() : this("", "")
