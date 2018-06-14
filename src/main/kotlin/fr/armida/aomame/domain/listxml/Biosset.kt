@@ -41,7 +41,7 @@ class Biosset(
 
     @field: [
     XmlAttribute(name = "default")
-    XmlJavaTypeAdapter(YesNoAdapter::class)
+    XmlJavaTypeAdapter(YesNoAdapter::class, type = Boolean::class)
     Column(name = "default")
     ]
     val default: Boolean

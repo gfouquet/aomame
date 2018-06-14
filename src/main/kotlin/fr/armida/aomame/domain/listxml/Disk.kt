@@ -65,7 +65,7 @@ class Disk(
 
     @field: [
     XmlAttribute(name = "writable")
-    XmlJavaTypeAdapter(YesNoAdapter::class)
+    XmlJavaTypeAdapter(YesNoAdapter::class, type = Boolean::class)
     ]
     val writable: Boolean,
 

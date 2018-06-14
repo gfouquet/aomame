@@ -1,0 +1,17 @@
+<game name="1944" sourcefile="cps2.c" isbios="yes" isdevice="yes" ismechanical="yes" runnable="yes">
+  <description>1944!</description>
+  <year>2000</year>
+  <manufacturer>Eighting</manufacturer>
+  <rom name="nffu.03" size="524288" crc="9693cf8f" sha1="c296cb008e282f77b44374d1c3638a3f4d5d5d4e" region="maincpu" offset="0"/>
+  <device_ref name="m68000"/>
+  <device_ref name="dsp16"/>
+  <chip type="cpu" tag="maincpu" name="M68000" clock="16000000"/>
+  <display tag="screen" type="raster" rotate="0" width="384" height="224" refresh="59.637405" pixclock="8000000" htotal="512" hbend="64" hbstart="448" vtotal="262" vbend="16" vbstart="240" />
+  <sound channels="2"/>
+  <input players="2" buttons="2" coins="2" service="yes">
+    <control type="joy" ways="8"/>
+  </input>
+  <port tag=":IN0">
+  </port>
+  <driver status="good" emulation="good" color="good" sound="good" graphic="good" savestate="supported"/>
+</game>

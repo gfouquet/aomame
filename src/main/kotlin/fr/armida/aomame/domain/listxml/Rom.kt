@@ -40,7 +40,7 @@ data class Rom(
     XmlAttribute(name = "size", required = true)
     Transient
     ]
-    var size: Long,
+    val size: Long?,
 
     @field: [
     XmlAttribute(name = "crc")
