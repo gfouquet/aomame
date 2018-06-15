@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "biosset")
-// TODO migrate to kotlin
 @Entity
 class Biosset(
     @field: [

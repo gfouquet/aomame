@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = ["description", "year", "manufacturer", "biosset", "rom", "disk", "driver"])
 @XmlRootElement(name = "game")
-@Entity// TODO migrate to kotlin
+@Entity
 class Game(
 
     @field: [
@@ -126,7 +126,7 @@ class Game(
     @XmlTransient
     private val logger = LoggerFactory.getLogger(Game::class.java)
 
-    constructor() : this(null, "", "", false, false, false, false, "", "", "", "", null, "", mutableListOf<Biosset>(), mutableListOf<Rom>(), mutableListOf<Disk>(), null)
+    constructor() : this(null, "", "", false, false, false, false, "", "", "", "", null, "", mutableListOf(), mutableListOf(), mutableListOf(), null)
 
     fun resolveInverseAssociations() {
         logger.trace("Resolving associations for game {}", this.name)

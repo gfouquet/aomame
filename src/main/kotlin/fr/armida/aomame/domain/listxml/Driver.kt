@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "")
 @XmlRootElement(name = "driver")
 @Entity
-// TODO migrate to kotlin
 data class Driver(
     @field: [
     Id

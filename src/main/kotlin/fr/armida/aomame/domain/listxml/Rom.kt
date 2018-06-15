@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlType(name = "")
 @XmlRootElement(name = "rom")
 @Entity
-// TODO migrate to kotlin
 data class Rom(
     @field: [
     Id
