@@ -21,7 +21,7 @@ class Biosset(
     SequenceGenerator(name = "seq_biosset", sequenceName = "seq_biosset", allocationSize = 1)
     XmlTransient
     ]
-    private val id: Long? = null,
+    val id: Long? = null,
 
 
     @field: [

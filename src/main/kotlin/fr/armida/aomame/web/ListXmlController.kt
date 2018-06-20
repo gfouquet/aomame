@@ -22,7 +22,6 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.io.File
 import java.io.FileInputStream
-import java.io.IOException
 import javax.xml.transform.stream.StreamSource
 
 /**
@@ -42,9 +41,8 @@ class ListXmlsController {
     @PostMapping("/{name}")
     @ResponseStatus(CREATED)
     @Transactional
-    fun addListXml(@RequestPart file: Mono<FilePart>, @PathVariable name: String, uriComponentsBuilder: UriComponentsBuilder): Mono<ResponseEntity<Any>> {
-
-        return Mono.just(listXmlRepository.countByName(name))
+    fun addListXml(@RequestPart file: Mono<FilePart>, @PathVariable name: String, uriComponentsBuilder: UriComponentsBuilder): Mono<ResponseEntity<Any>> =
+        Mono.just(listXmlRepository.countByName(name))
             // this check is somewhat rendered useless because of long processing time of file + not trnsactional nature
             // of the mono processing. on the other hand it may prevent from unnecessary unmarshalling
             .map { count ->
@@ -71,7 +69,7 @@ class ListXmlsController {
 
                 listXml
             }
-            .map { l ->
+            .map {
                 val uriComponents = uriComponentsBuilder.path("/listxmls/{name}").buildAndExpand(name)
                 ResponseEntity.created(uriComponents.toUri()).build<Any>()
             }
@@ -79,37 +77,25 @@ class ListXmlsController {
             // @ControllerAdvice + @ExceptionHandler rendered useless because exception happens in another thread, not
             // actually in this controller's cflow
             .onErrorReturn({ ex -> ex is ConflictingNameException }, ResponseEntity.status(HttpStatus.CONFLICT).build<Any>())
-    }
 
     private fun unmarshall(file: File): Mame {
         logger.debug("Unmarshalling xml file")
-        try {
-            return unmarshaller.unmarshal(StreamSource(FileInputStream(file))) as Mame
-        } catch (e: IOException) {
-            throw RuntimeException(e)
-        }
+        return unmarshaller.unmarshal(StreamSource(FileInputStream(file))) as Mame
 
     }
 
     private fun partToTempFile(part: FilePart): File {
-        try {
-            val f = File.createTempFile("listxml", "xml")
-            part.transferTo(f)
+        val f = File.createTempFile("listxml", "xml")
+        part.transferTo(f)
 
-            return f
-
-        } catch (e: IOException) {
-            throw RuntimeException(e)
-        }
-
+        return f
     }
 
     @GetMapping
     @Transactional(readOnly = true)
     @JsonView(View.Summary::class)
     @ResponseStatus(OK)
-    fun fetchListXmls(): Flux<ListXml> {
-        return Flux.fromIterable(listXmlRepository.findAll())
-    }
+    fun fetchListXmls(): Flux<ListXml> =
+        Flux.fromIterable(listXmlRepository.findAll())
 
 }

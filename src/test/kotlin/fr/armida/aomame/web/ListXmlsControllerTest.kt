@@ -1,6 +1,5 @@
 package fr.armida.aomame.web
 
-import fr.armida.aomame.domain.listxml.ListXml
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -81,13 +80,12 @@ internal class ListXmlsControllerTest {
 
 
     @Test
-    fun _02_should_fetch_listxml() {
-        //         expect
+    fun _02_should_fetch_listxml() =
+        // expect
         client.get().uri("/listxmls")
             .exchange()
             .expectStatus().isOk
             .expectBody().json("[{name:'mame 154'}]")
-    }
 
     @Test
     fun _03_should_not_post_listxml_twice() {

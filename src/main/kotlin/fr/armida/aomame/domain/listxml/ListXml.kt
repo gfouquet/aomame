@@ -17,7 +17,7 @@ class ListXml(
     SequenceGenerator(name = "seq_list_xml", sequenceName = "seq_list_xml", allocationSize = 1)
     JsonView(View.Summary::class)
     ]
-    var id: Long? = null
+    val id: Long? = null
 
 ) {
     @field: [
@@ -34,7 +34,7 @@ class ListXml(
 
     constructor() : this(null)
 
-    constructor(mame: Mame) : this(null) {
+    constructor(mame: Mame) : this() {
         this.mame = mame
         mame.listXml = this
     }

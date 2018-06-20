@@ -5,4 +5,5 @@ package fr.armida.aomame.web
  *
  * @author gfouquet
  */
-class ConflictingNameException(val name: String, val type: Class<*>) : RuntimeException("A " + type.simpleName + " named " + name + " already exists")
+class ConflictingNameException(val name: String, val type: Class<*>) :
+    RuntimeException("A " + type.simpleName + " named " + name + " already exists")

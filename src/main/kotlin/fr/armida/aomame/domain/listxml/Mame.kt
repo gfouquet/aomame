@@ -24,7 +24,7 @@ class Mame(
     Id
     XmlTransient
     ]
-    var id: Long? = null,
+    val id: Long? = null,
 
     @field: [
     XmlAttribute

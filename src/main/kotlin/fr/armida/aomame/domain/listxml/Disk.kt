@@ -21,7 +21,7 @@ class Disk(
     SequenceGenerator(name = "seq_disk", sequenceName = "seq_disk", allocationSize = 1)
     XmlTransient
     ]
-    var id: Long? = null,
+    val id: Long? = null,
 
 
     @field: [

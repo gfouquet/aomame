@@ -21,7 +21,7 @@ class Game(
     SequenceGenerator(name = "seq_game", sequenceName = "seq_game", allocationSize = 1)
     XmlTransient
     ]
-    var id: Long? = null,
+    val id: Long? = null,
 
 
     @field: [
@@ -131,7 +131,7 @@ class Game(
 
     fun resolveInverseAssociations() {
         logger.trace("Resolving associations for game {}", this.name)
-        if (driver != null) driver!!.game = this
+        driver?.let { it.game = this }
     }
 
 
