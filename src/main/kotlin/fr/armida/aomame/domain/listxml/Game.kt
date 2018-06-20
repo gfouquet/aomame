@@ -124,6 +124,7 @@ class Game(
 
 ) {
     @XmlTransient
+    @Transient
     private val logger = LoggerFactory.getLogger(Game::class.java)
 
     constructor() : this(null, "", "", false, false, false, false, "", "", "", "", null, "", mutableListOf(), mutableListOf(), mutableListOf(), null)
