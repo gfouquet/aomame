@@ -29,14 +29,8 @@ import javax.xml.transform.stream.StreamSource
  */
 @RestController
 @RequestMapping("/listxmls")
-class ListXmlsController {
+class ListXmlsController(private val unmarshaller: Unmarshaller, private val listXmlRepository: ListXmlRepository) {
     private val logger by loggerFactory()
-
-    @Autowired
-    private lateinit var unmarshaller: Unmarshaller
-
-    @Autowired
-    private lateinit var listXmlRepository: ListXmlRepository
 
     @PostMapping("/{name}")
     @ResponseStatus(CREATED)

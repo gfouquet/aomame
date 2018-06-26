@@ -9,7 +9,7 @@ import spock.lang.Unroll
 
 import java.util.function.Predicate
 
-//import static fr.armida.aomame.support.PredicateLogger.log
+//import static fr.armida.aomame.support.PredicateLoggerExtension.log
 
 /**
  * Created by gregory on 22/01/2017.

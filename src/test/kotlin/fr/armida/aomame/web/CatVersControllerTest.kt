@@ -25,7 +25,6 @@ import java.time.Duration.ofMinutes
 /**
  * @author gfouquet
  */
-//@RunWith(JUnitPlatform.class)
 @SpringBootTest
 @ExtendWith(SpringExtension::class)
 @AutoConfigureWebTestClient
@@ -42,7 +41,7 @@ class CatVersControllerTest {
     }
 
     @Test
-    fun _01_should_post_listxml() {
+    fun _01_should_post_catver() {
         // given
         val catver = Paths.get("target", "test-classes", "catver.ini")
         val file = PathResource(catver)
@@ -69,18 +68,18 @@ class CatVersControllerTest {
         return parts
     }
 
-//    @Test
-//    fun _02_should_fetch_listxml() {
-//        // expect
-//        client.get().uri("/catvers")
-//            .exchange()
-//            .expectStatus().isOk
-//            .expectBody().json("[{name:'catver test'}]")
-//    }
+    @Test
+    fun _02_should_fetch_catver() {
+        // expect
+        client.get().uri("/catvers")
+            .exchange()
+            .expectStatus().isOk
+            .expectBody().json("[{name:'catver test'}]")
+    }
 
 
     @Test
-    fun _03_should_not_post_listxml_twice() {
+    fun _03_should_not_post_catver_twice() {
         // given
         val file = FileSystemResource(createTempFile("empty", "xml"));
 

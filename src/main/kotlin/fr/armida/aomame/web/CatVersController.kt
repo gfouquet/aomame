@@ -1,10 +1,14 @@
 package fr.armida.aomame.web
 
+import com.fasterxml.jackson.annotation.JsonView
 import fr.armida.aomame.domain.catver.CatVer
+import fr.armida.aomame.domain.listxml.ListXml
+import fr.armida.aomame.domain.view.View
 import fr.armida.aomame.extension.loggerFactory
 import fr.armida.aomame.repository.CatVerRepository
 import fr.armida.aomame.support.CatVerIniParser
 import org.slf4j.Logger
+import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.CONFLICT
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.ResponseEntity
@@ -12,6 +16,7 @@ import org.springframework.http.codec.multipart.FilePart
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.io.File
 import java.io.IOException
@@ -63,4 +68,12 @@ class CatVersController(private val catVerRepository: CatVerRepository, private 
         }
 
     }
+
+    @GetMapping
+    @Transactional(readOnly = true)
+    @JsonView(View.Summary::class)
+    @ResponseStatus(HttpStatus.OK)
+    fun fetchCatVers(): Flux<CatVer> =
+        Flux.fromIterable(catVerRepository.findAll())
+
 }

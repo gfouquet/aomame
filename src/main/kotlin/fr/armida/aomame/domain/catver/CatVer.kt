@@ -1,6 +1,8 @@
 package fr.armida.aomame.domain.catver
 
 
+import com.fasterxml.jackson.annotation.JsonView
+import fr.armida.aomame.domain.view.View
 import java.util.*
 import javax.persistence.*
 import javax.persistence.CascadeType.ALL
@@ -14,10 +16,14 @@ class CatVer(
     @field:[
     Id
     GeneratedValue(strategy = GenerationType.IDENTITY)
+    JsonView(View.Summary::class)
     ]
     val id: Long? = null,
 
-    @field:NotBlank
+    @field:[
+    NotBlank
+    JsonView(View.Summary::class)
+    ]
     val name: String,
 
     @field:[
