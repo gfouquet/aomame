@@ -1,6 +1,5 @@
 package fr.armida.aomame.support
 
-import fr.armida.aomame.domain.catver.CatVer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -25,27 +24,27 @@ class CatVerIniParserTest extends Specification {
 
     def "should parse categories"() {
         when:
-        CatVer res = parser.parse(catver.file)
+        def categories = parser.parse(catver.file).first
 
         then:
-        res.categories*.name as Set == ["Maze", "Driving", "Puzzle", "Casino"] as Set
-        res.categories.find({ it.name == "Maze" }).genres*.name == ["Shooter Small"]
-        res.categories.find({
+        categories*.name as Set == ["Maze", "Driving", "Puzzle", "Casino"] as Set
+        categories.find({ it.name == "Maze" }).genres*.name == ["Shooter Small"]
+        categories.find({
             it.name == "Driving"
         }).genres*.name as Set == ["Generic", "Race (chase view) Bike"] as Set
-        res.categories.find({ it.name == "Casino" }).genres*.name == ["Reels"]
+        categories.find({ it.name == "Casino" }).genres*.name == ["Reels"]
 
     }
 
     def "should parse bindings"() {
         when:
-        CatVer res = parser.parse(catver.file)
+        def bindings = parser.parse(catver.file).second
 
         then:
-        res.bindings*.rom as Set == ["005", "18wheelr", "3kokushi", "500gp", "adults", "adustcm"] as Set
-        res.bindings.find({ it.rom == "18wheelr" }).genre.name == "Generic"
-        res.bindings.find({ it.rom == "adults" }).genre.name == "Reels"
-        res.bindings.find({ it.rom == "adults" }).mature == true
+        bindings*.rom as Set == ["005", "18wheelr", "3kokushi", "500gp", "adults", "adustcm"] as Set
+        bindings.find({ it.rom == "18wheelr" }).genre.name == "Generic"
+        bindings.find({ it.rom == "adults" }).genre.name == "Reels"
+        bindings.find({ it.rom == "adults" }).mature == true
 
     }
 

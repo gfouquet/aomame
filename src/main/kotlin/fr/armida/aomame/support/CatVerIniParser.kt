@@ -22,7 +22,7 @@ private val CAT_LINE_PATTERN = Pattern.compile("(?i)([A-z0-9_\\-]+?) *= *([A-z0-
 @Component
 class CatVerIniParser {
 
-    fun parse(file: File): CatVer {
+    fun parse(file: File): Pair<Set<Cat>, Set<CatRomBinding>> {
 
         val lines = Files.lines(file.toPath())
             .filter(categoryLinePredicate()) // filters out non cat lines
@@ -34,15 +34,15 @@ class CatVerIniParser {
 
         val bindings = linesByGenreByCat.entries
             .flatMap { catEntry ->
-                val cat = Cat(null, catEntry.key)
+                val cat = Cat(name = catEntry.key)
 
                 catEntry.value.entries
                     .flatMap { genreEntry ->
-                        val genre = Genre(null, genreEntry.key, cat)
+                        val genre = Genre(name = genreEntry.key, category = cat)
 
                         genreEntry.value
                             .map { l ->
-                                CatRomBinding(null, l.rom, l.mature, genre)
+                                CatRomBinding(rom = l.rom, mature = l.mature, genre = genre)
                             }
                     }
             }.toSet()
@@ -54,8 +54,7 @@ class CatVerIniParser {
             .toSet()
 
 
-        // FIXME
-        return CatVer(null, "", cats, bindings)
+        return Pair(cats, bindings)
     }
 
     private fun parseLine(line: String): CatVerLine {
