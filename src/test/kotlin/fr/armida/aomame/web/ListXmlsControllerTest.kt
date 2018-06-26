@@ -80,12 +80,13 @@ internal class ListXmlsControllerTest {
 
 
     @Test
-    fun _02_should_fetch_listxml() =
+    fun _02_should_fetch_listxml() {
         // expect
         client.get().uri("/listxmls")
             .exchange()
             .expectStatus().isOk
             .expectBody().json("[{name:'mame 154'}]")
+    }
 
     @Test
     fun _03_should_not_post_listxml_twice() {
