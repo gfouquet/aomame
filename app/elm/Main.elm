@@ -2,8 +2,10 @@ module Main exposing (main)
 
 import Html exposing (..)
 import Html.Events exposing (..)
-import Navigation as Nav
+import Navigation exposing (Location)
 
+import View.Menu exposing (..)
+import Routes exposing (Sitemap(..))
 
 -- Main
 -- ----
@@ -11,7 +13,7 @@ import Navigation as Nav
 
 main : Program Never Model Msg
 main =
-  Nav.program UrlChange
+  Navigation.program UrlChange
     { init = init
     , update = update
     , view = view
@@ -26,8 +28,9 @@ main =
 
 
 type alias Model =
-  { text : String
-  , history : List Nav.Location
+  { route : Sitemap
+  , text : String
+  , history : List Location
   }
 
 
@@ -37,11 +40,11 @@ type alias Model =
 --    | NavbarMsg Navbar.State
 --    | Fetch (Result Http.Error (List Post))
 type Msg
-  = UrlChange Nav.Location
+  = UrlChange Location
 
-init : Nav.Location -> ( Model, Cmd Msg )
+init : Location -> ( Model, Cmd Msg )
 init location =
-  ( Model "bleh" [location]
+  ( Model Home "bleh" [ location ]
   , Cmd.none
   )
 --    let
@@ -81,7 +84,7 @@ subscriptions model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  ( Model "plop" model.history
+  ( Model Home "plop" model.history
   , Cmd.none
   )
 --    case msg of
@@ -143,7 +146,11 @@ update msg model =
 
 --view : Model -> Html Msg
 view model =
-  div [] [text <| "yolo, " ++ model.text]
+  div
+    []
+    [ text <| "yolo, " ++ model.text
+    , mainMenu
+    ]
 
 --view : Model -> Html Msg
 --view model =

@@ -5,68 +5,56 @@ import Route exposing (..)
 
 
 type Sitemap
-    = HomeR
-    | PostsR
-    | PostR Int
-    | AboutR
-    | NotFoundR
+  = Home
+  | ListXmls
+  | CatVerInis
 
+-- Private functions
+-- -----------------
 
-homeR : Route Sitemap
-homeR =
-    HomeR := static ""
+home : Route Sitemap
+home =
+  route Home (static "")
 
+listXmls : Route Sitemap
+listXmls =
+  route ListXmls (static "listXmls")
 
-postsR : Route Sitemap
-postsR =
-    PostsR := static "posts"
-
-
-postR : Route Sitemap
-postR =
-    PostR := static "posts" </> int
-
-
-aboutR : Route Sitemap
-aboutR =
-    AboutR := static "about"
-
+catVerInis : Route Sitemap
+catVerInis =
+  route CatVerInis (static "catVerInis")
 
 sitemap : Router Sitemap
 sitemap =
-    router [ homeR, postsR, postR, aboutR ]
+  router [ home, listXmls, catVerInis ]
 
 
-match : String -> Sitemap
+-- Public API
+-- ----------
+
+match : String -> Maybe Sitemap
 match =
-    Route.match sitemap
-        >> Maybe.withDefault NotFoundR
+  Route.match sitemap
 
 
 toString : Sitemap -> String
-toString r =
-    case r of
-        HomeR ->
-            reverse homeR []
+toString route =
+  case route of
+    Home ->
+      reverse home []
 
-        PostsR ->
-            reverse postsR []
+    ListXmls ->
+      reverse listXmls []
 
-        PostR id ->
-            reverse postR [ Basics.toString id ]
-
-        AboutR ->
-            reverse aboutR []
-
-        NotFoundR ->
-            Debug.crash "cannot render NotFound"
+    CatVerInis ->
+      reverse catVerInis []
 
 
-parsePath : Location -> Sitemap
+parsePath : Location -> Maybe Sitemap
 parsePath =
-    .pathname >> match
+  .pathname >> match
 
 
 navigateTo : Sitemap -> Cmd msg
 navigateTo =
-    toString >> Navigation.newUrl
+  toString >> Navigation.newUrl
